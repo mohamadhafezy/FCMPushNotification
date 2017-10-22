@@ -11,6 +11,8 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
 let API_KEY = "key=AAAAr_E2NCM:APA91bEgmznGj0R5PpRg1ek7GKeMmpADJ5BjFdqK81sU8-DpZZ6lwwd9H9PAugMkM-Q4KKXil3Dt961MgDQubbSBRyx0xEvvamJ4PljIGf5mx-SDtHIB3KbIvGWJq5-AUH36fLC-82CL"; // Your FCM server API key
+// let API_KEY = "PLEASE_ENTER_YOUR_FCM_API_KEY"; // Your FCM server API key
+// let USER_KEY = "PLEASE_ENTER_THE_TEST_USER_FCM_TOKEN_ID"; // User FCM Token ID
 let USER_KEY = "eWRAtJC2zTs:APA91bEZ_zgxYiEWFaxpHI_wMDO5IApmEtIpYvBZ_D1pkjP8ekQ9M33oceEqDtZ0Z7hyrWHGS4TzIg0Ql6BkW48smrpnZSAMVHk4znpDU-89hDGMOpxO6vFyth642ZU6N64W7ZYIRLDe"; // User client ID
 
 let TOPIC_GLOBAL = "/topics/global";
@@ -28,7 +30,7 @@ app.post('/send/notification', function (req, res) {
             "title": req.body.title,
             "body": req.body.message
         },
-        to : USER_KEY
+        to : req.body.target_token ? req.body.target_token : USER_KEY,
         // to : TOPIC_GLOBAL,
         // to : TOPIC_VIP_USER,
         // condition : "'onscreen' in topics && 'special-user' in topics",
@@ -47,7 +49,7 @@ app.post('/send/data-notification', function (req, res) {
             title: req.body.title,
             body: body
         },
-        to : USER_KEY,
+        to : req.body.target_token ? req.body.target_token : USER_KEY,
         // to : TOPIC_GLOBAL,
         // to : TOPIC_VIP_USER,
     };
@@ -66,6 +68,9 @@ app.post('/send/data-notification/VIP', function (req, res) {
             body: body
         },
         condition : "'onscreen' in topics && 'vip_user' in topics",
+        // to : req.body.target_token ? req.body.target_token : USER_KEY,
+        // to : TOPIC_GLOBAL,
+        // to : TOPIC_VIP_USER,
     };
 
     sendNotification(data, res)

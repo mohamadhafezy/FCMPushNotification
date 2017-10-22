@@ -33,6 +33,13 @@
 							"value": "This is a message from node.js API.",
 							"description": "",
 							"type": "text"
+						},
+						{
+							"key": "target_token",
+							"value": "ENTER_TARGET_USER_TOKEN_ID",
+							"description": "",
+							"type": "text",
+							"disabled": true
 						}
 					]
 				},
@@ -80,8 +87,54 @@
 							"type": "text"
 						},
 						{
+							"key": "target_token",
+							"value": "ENTER_TARGET_USER_TOKEN_ID",
+							"description": "",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Notification With Data copy",
+			"request": {
+				"url": "http://localhost:3000/send/data-notification/VIP",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "title",
+							"value": "Dear VIP",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "message",
+							"value": "This is a notification for you. We'll hope you have a nice day.",
+							"description": "",
+							"type": "text"
+						},
+						{
 							"key": "type",
 							"value": "dialog_message",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "target_token",
+							"value": "ENTER_TARGET_USER_TOKEN_ID",
 							"description": "",
 							"type": "text",
 							"disabled": true
