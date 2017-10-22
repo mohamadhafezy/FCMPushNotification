@@ -1,0 +1,31 @@
+{
+  "name": "fcm-push-notification",
+  "version": "1.0.0",
+  "description": "A node.js project for FCM Push Notification.",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Sadra Isapanah Amlashi <sadra@isapanah.com> (http://isapanah.com)",
+  "keywords": [
+    "node",
+    "Firebase",
+    "Firebase Cloud Messaging",
+    "Push Notification"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sadra/FCMPushNotification"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3",
+    "firebase-admin": "^5.0.0",
+    "nodemon": "^1.11.0",
+    "request": "^2.81.0",
+    "request-promise": "^4.2.1",
+    "urlencode": "^1.1.0"
+  }
+}
