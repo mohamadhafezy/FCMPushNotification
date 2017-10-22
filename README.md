@@ -4,5 +4,4 @@ This repo created made for a toturial about Firebase Cloud Messagin, you can fin
 
 # How to use
 Just clone this repo. From **root directory** of repo run the `npm install` in terminal to install the necessary packages.
-
 Then, run `npm start` in terminal & enjoy it. 😎
