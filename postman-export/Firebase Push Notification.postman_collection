@@ -1,0 +1,96 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Firebase Push Notification",
+		"_postman_id": "449d7331-31fa-dfba-49a0-ca68e3a2e86b",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Regular Notification",
+			"request": {
+				"url": "http://localhost:3000/send/notification",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "title",
+							"value": "New message from API",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "message",
+							"value": "This is a message from node.js API.",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Notification With Data",
+			"request": {
+				"url": "http://localhost:3000/send/data-notification",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "title",
+							"value": "New notification with banner",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "message",
+							"value": "This is a notification with banner from node.js API.",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "banner_url",
+							"value": "https://ak2.picdn.net/shutterstock/videos/13361483/thumb/1.jpg",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "type",
+							"value": "banner",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "type",
+							"value": "dialog_message",
+							"description": "",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
