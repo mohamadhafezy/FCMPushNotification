@@ -23,9 +23,10 @@ app.get('/', function (req, res) {
     res.send('Hi, This is node.js project')
 });
 
+
 app.post('/send/notification', function (req, res) {
 
-    let data = {
+    let payload = {
         notification: {
             "title": req.body.title,
             "body": req.body.message
@@ -36,7 +37,7 @@ app.post('/send/notification', function (req, res) {
         // condition : "'onscreen' in topics && 'special-user' in topics",
     };
 
-    sendNotification(data, res)
+    sendNotification(payload, res)
 
 });
 
@@ -44,17 +45,17 @@ app.post('/send/data-notification', function (req, res) {
 
     let body = req.body;
 
-    let data = {
+    let payload = {
         data: {
             title: req.body.title,
-            body: body
+            body: req.body
         },
         to : req.body.target_token ? req.body.target_token : USER_KEY,
         // to : TOPIC_GLOBAL,
         // to : TOPIC_VIP_USER,
     };
 
-    sendNotification(data, res)
+    sendNotification(payload, res)
 
 });
 
@@ -62,9 +63,8 @@ app.post('/send/data-notification/VIP', function (req, res) {
 
     let body = req.body;
 
-    let data = {
+    let payload = {
         data: {
-            title: req.body.title,
             body: body
         },
         condition : "'onscreen' in topics && 'vip_user' in topics",
@@ -73,16 +73,40 @@ app.post('/send/data-notification/VIP', function (req, res) {
         // to : TOPIC_VIP_USER,
     };
 
-    sendNotification(data, res)
+    sendNotification(payload, res)
 
 });
 
-function sendNotification(data, res) {
+app.post('/send/combined-notification/VIP', function (req, res) {
+
+    let body = req.body;
+
+    console.log(req.body)
+
+    let payload = {
+        notification: {
+            "title": req.body.notify_title,
+            "body": req.body.notify_message
+        },
+        data: {
+            body: body
+        },
+        condition : "'onscreen' in topics && 'vip_user' in topics",
+        // to : req.body.target_token ? req.body.target_token : USER_KEY,
+        // to : TOPIC_GLOBAL,
+        // to : TOPIC_VIP_USER,
+    };
+
+    sendNotification(payload, res)
+
+});
+
+function sendNotification(payload, res) {
 
     let options = {
         method: 'POST',
         uri: 'https://fcm.googleapis.com/fcm/send',
-        body: data,
+        body: payload,
         headers: {
             'Content-Type': 'application/json',
             'Authorization': API_KEY,
@@ -93,11 +117,11 @@ function sendNotification(data, res) {
     rp(options)
         .then(function (body) {
             res.send(body);
-            console.log("The notification: "+JSON.stringify(data)+", sent successfully.")
+            console.log("The notification: "+JSON.stringify(payload)+", sent successfully.")
         })
         .catch(function (err) {
             res.send(err);
-            console.log("The notification: "+JSON.stringify(data)+", has problem to be sent. Error is: "+err)
+            console.log("The notification: "+JSON.stringify(payload)+", has problem to be sent. Error is: "+err)
         });
 
 }
