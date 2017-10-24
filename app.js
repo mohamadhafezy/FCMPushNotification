@@ -26,15 +26,17 @@ app.get('/', function (req, res) {
 
 app.post('/send/notification', function (req, res) {
 
+    let body = req.body;
+
     let payload = {
         notification: {
-            "title": req.body.title,
-            "body": req.body.message
+            "title": body.title,
+            "body": body.message
         },
-        to : req.body.target_token ? req.body.target_token : USER_KEY,
+        to : body.target_token ? body.target_token : USER_KEY,
         // to : TOPIC_GLOBAL,
         // to : TOPIC_VIP_USER,
-        // condition : "'onscreen' in topics && 'special-user' in topics",
+        // condition : "'onscreen' in topics && 'vip_user' in topics",
     };
 
     sendNotification(payload, res)
@@ -47,12 +49,13 @@ app.post('/send/data-notification', function (req, res) {
 
     let payload = {
         data: {
-            title: req.body.title,
-            body: req.body
+            title: body.title,
+            body: body
         },
-        to : req.body.target_token ? req.body.target_token : USER_KEY,
+        to : body.target_token ? body.target_token : USER_KEY,
         // to : TOPIC_GLOBAL,
         // to : TOPIC_VIP_USER,
+        // condition : "'onscreen' in topics && 'vip_user' in topics",
     };
 
     sendNotification(payload, res)
@@ -64,9 +67,7 @@ app.post('/send/data-notification/VIP', function (req, res) {
     let body = req.body;
 
     let payload = {
-        data: {
-            body: body
-        },
+        data: body,
         condition : "'onscreen' in topics && 'vip_user' in topics",
         // to : req.body.target_token ? req.body.target_token : USER_KEY,
         // to : TOPIC_GLOBAL,
@@ -81,16 +82,12 @@ app.post('/send/combined-notification/VIP', function (req, res) {
 
     let body = req.body;
 
-    console.log(req.body)
-
     let payload = {
         notification: {
-            "title": req.body.notify_title,
-            "body": req.body.notify_message
+            "title": body.notify_title,
+            "body": body.notify_message
         },
-        data: {
-            body: body
-        },
+        data: body,
         condition : "'onscreen' in topics && 'vip_user' in topics",
         // to : req.body.target_token ? req.body.target_token : USER_KEY,
         // to : TOPIC_GLOBAL,
@@ -111,7 +108,10 @@ function sendNotification(payload, res) {
             'Content-Type': 'application/json',
             'Authorization': API_KEY,
         },
-        json: true
+        json: true,
+        // collapseKey: "discount",
+        // priority: "high",
+        // timeToLive: 60 * 60 * 24,
     };
 
     rp(options)
