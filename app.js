@@ -46,10 +46,7 @@ app.post('/send/data-notification', function (req, res) {
     let body = req.body;
 
     let payload = {
-        data: {
-            title: body.title,
-            body: body
-        },
+        data: body,
         to : body.target_token ? body.target_token : TEST_USER_KEY,
         // to : TOPIC_GLOBAL,
         // to : TOPIC_VIP_USER,
