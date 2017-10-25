@@ -10,10 +10,8 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
-let API_KEY = "key=AAAAr_E2NCM:APA91bEgmznGj0R5PpRg1ek7GKeMmpADJ5BjFdqK81sU8-DpZZ6lwwd9H9PAugMkM-Q4KKXil3Dt961MgDQubbSBRyx0xEvvamJ4PljIGf5mx-SDtHIB3KbIvGWJq5-AUH36fLC-82CL"; // Your FCM server API key
-// let API_KEY = "PLEASE_ENTER_YOUR_FCM_API_KEY"; // Your FCM server API key
-// let USER_KEY = "PLEASE_ENTER_THE_TEST_USER_FCM_TOKEN_ID"; // User FCM Token ID
-let USER_KEY = "eWRAtJC2zTs:APA91bEZ_zgxYiEWFaxpHI_wMDO5IApmEtIpYvBZ_D1pkjP8ekQ9M33oceEqDtZ0Z7hyrWHGS4TzIg0Ql6BkW48smrpnZSAMVHk4znpDU-89hDGMOpxO6vFyth642ZU6N64W7ZYIRLDe"; // User client ID
+let API_KEY = "key="+"PLEASE_ENTER_YOUR_FCM_API_KEY"; // Your FCM server API key
+let TEST_USER_KEY = "PLEASE_ENTER_THE_TEST_USER_FCM_TOKEN_ID"; // User FCM Token ID
 
 let TOPIC_GLOBAL = "/topics/global";
 let TOPIC_ONSCREEN = "/topics/onscreen";
@@ -33,7 +31,7 @@ app.post('/send/notification', function (req, res) {
             "title": body.title,
             "body": body.message
         },
-        to : body.target_token ? body.target_token : USER_KEY,
+        to : body.target_token ? body.target_token : TEST_USER_KEY,
         // to : TOPIC_GLOBAL,
         // to : TOPIC_VIP_USER,
         // condition : "'onscreen' in topics && 'vip_user' in topics",
@@ -52,7 +50,7 @@ app.post('/send/data-notification', function (req, res) {
             title: body.title,
             body: body
         },
-        to : body.target_token ? body.target_token : USER_KEY,
+        to : body.target_token ? body.target_token : TEST_USER_KEY,
         // to : TOPIC_GLOBAL,
         // to : TOPIC_VIP_USER,
         // condition : "'onscreen' in topics && 'vip_user' in topics",
@@ -69,7 +67,7 @@ app.post('/send/data-notification/VIP', function (req, res) {
     let payload = {
         data: body,
         condition : "'onscreen' in topics && 'vip_user' in topics",
-        // to : req.body.target_token ? req.body.target_token : USER_KEY,
+        // to : req.body.target_token ? req.body.target_token : TEST_USER_KEY,
         // to : TOPIC_GLOBAL,
         // to : TOPIC_VIP_USER,
     };
@@ -89,7 +87,7 @@ app.post('/send/combined-notification/VIP', function (req, res) {
         },
         data: body,
         condition : "'onscreen' in topics && 'vip_user' in topics",
-        // to : req.body.target_token ? req.body.target_token : USER_KEY,
+        // to : req.body.target_token ? req.body.target_token : TEST_USER_KEY,
         // to : TOPIC_GLOBAL,
         // to : TOPIC_VIP_USER,
     };
